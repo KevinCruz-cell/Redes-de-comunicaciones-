@@ -187,3 +187,30 @@
     color: #999;
     text-align: right;
 }
+
+#imagen
+
+    /* El contenedor del enlace */
+.brand-link {
+    display: flex;         /* Pone imagen y texto en la misma fila */
+    align-items: center;   /* Los centra verticalmente */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    height: 45px;          /* Altura de la barra azul */
+}
+
+/* Ajuste del Logo */
+.logo-small {
+    height: 28px;          /* Un poco menos que la barra para que no toque los bordes */
+    width: auto;
+    display: block;        /* Evita espacios extraños abajo */
+    margin-right: 12px;    /* Espacio vital entre logo y texto */
+}
+
+/* Ajuste del Texto */
+.brand-text {
+    color: #ffffff;        /* Blanco puro como en la captura */
+    font-size: 20px;       /* Tamaño legible */
+    font-weight: 600;      /* Un poco de grosor */
+    line-height: 1;        /* Evita que el texto se suba o baje */
+    display: inline-block; /* Asegura que el texto se renderice */
+}

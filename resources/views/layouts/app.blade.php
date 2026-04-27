@@ -10,7 +10,7 @@
 <header class="navbar-top">
     <div class="navbar-brand">
         <a href="{{ url('/') }}" class="brand-link">
-            <img src="{{ asset('logo_nuupnet_white.png') }}" alt="NuupNet" class="logo-small">
+            <img src="{{ asset('nuupwisp.png') }}" alt="NuupNet" class="logo-small">
             <span class="brand-text">NuupNet</span>
         </a>
     </div>
