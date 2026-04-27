@@ -9,12 +9,13 @@ class RouterLoginController extends Controller
 {
     public function showLogin()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function testConnection(RouterService $routerService)
     {
         $result = $routerService->isReachable();
+
         return view('router-test', compact('result'));
     }
 

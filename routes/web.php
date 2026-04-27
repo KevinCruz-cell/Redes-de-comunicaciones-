@@ -14,30 +14,34 @@ Route::get('/login', [RouterLoginController::class, 'showLogin'])->name('login')
 Route::post('/login', [RouterLoginController::class, 'authenticate'])->name('router.login');
 Route::post('/logout', [RouterLoginController::class, 'logout'])->name('router.logout');
 
-// Grupo de rutas protegidas (Middleware de sesión)
-Route::middleware(['auth.router'])->group(function () {
+// Logs de PostgreSQL
+Route::get('/logs/postgresql', [PostgresLogController::class, 'index'])->name('logs.postgresql');
 
-    // Test de conexión
-    Route::get('/router-test', [RouterLoginController::class, 'testConnection'])->name('router.test');
+// Test de conexión
+Route::get('/router-test', [RouterLoginController::class, 'testConnection'])->name('router.test');
 
-    // Logs
-    Route::get('/logs/postgresql', [PostgresLogController::class, 'index'])->name('logs.postgresql');
+// --- SECCIÓN RED (Vistas con validación manual de sesión) ---
 
-    // --- SECCIÓN RED (DHCP y HOSTS) ---
+// DHCP Configuración General
+Route::get('/dhcp', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dhcp.dhcp');
+})->name('dhcp.index');
 
-    // DHCP Configuración General
-    Route::get('/dhcp', function () {
-        return view('dhcp.dhcp'); // Apunta a views/dhcp/dhcp.blade.php
-    })->name('dhcp.index');
+// DHCP Archivos Resolv y Hosts
+Route::get('/dhcp/resolv', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dhcp.dhcp-resolv');
+})->name('dhcp.resolv');
 
-    // DHCP Archivos Resolv y Hosts
-    Route::get('/dhcp/resolv', function () {
-        return view('dhcp.dhcp-resolv'); // Apunta a views/dhcp/dhcp-resolv.blade.php
-    })->name('dhcp.resolv');
-
-    // Nombres de Host
-    Route::get('/nombres-host', function () {
-        return view('hosts.hosts'); // Apunta a views/hosts/hosts.blade.php
-    })->name('hosts.index');
-
-});
+// Nombres de Host
+Route::get('/nombres-host', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('hosts.hosts');
+})->name('hosts.index');
