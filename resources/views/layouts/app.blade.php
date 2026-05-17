@@ -58,8 +58,8 @@
                 </button>
                 <ul class="submenu">
                     <li><a href="#">Interfaces</a></li>
-                    <li><a href="#">Wi-Fi</a></li>
-                    <li><a href="#">Conmutador</a></li>
+                    <li><a href="{{ route('Wifi_Conmutador') }}">Wi-Fi</a></li>
+                    <li><a href="{{ route('Wifi_Conmutador') }}">Conmutador</a></li>
                     <li class="{{ request()->is('dhcp*') ? 'active-item' : '' }}">
                         <a href="/dhcp">DHCP y DNS</a>
                     </li>

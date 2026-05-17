@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostgresLogController;
 use App\Http\Controllers\RouterLoginController;
+//Equipo Kevin
+use App\Http\Controllers\RouterController;
 
 // Vista principal
 Route::get('/', function () {
@@ -45,3 +47,21 @@ Route::get('/nombres-host', function () {
     }
     return view('hosts.hosts');
 })->name('hosts.index');
+
+
+//Equipo Kevin
+// Vista principal
+Route::get('/', [RouterController::class, 'index'])->name('panel.index');
+
+// Endpoints de la API interna para el Router
+Route::prefix('api/router')->group(function () {
+    Route::get('/wifi-info', [RouterController::class, 'getWifiInfo']);
+    Route::post('/restart-wifi', [RouterController::class, 'restartWifi']);
+    Route::get('/scan', [RouterController::class, 'scanNetworks']);
+    Route::get('/devices', [RouterController::class, 'getConnectedDevices']);
+    Route::post('/switch', [RouterController::class, 'executeSwitchCommand']);
+    Route::post('/apply-uci', [RouterController::class, 'applyUci']);
+});Route::post('/api/router/save-switch', [RouterController::class, 'saveSwitchConfig']);
+Route::get('/api/router/port-status', [RouterController::class, 'getPortStatus']);
+Route::post('/api/router/set-port-state', [RouterController::class, 'setPortState']);
+Route::get('/Wifi_Conmutador', [RouterController::class, 'index'])->name('Wifi_Conmutador');
