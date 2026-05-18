@@ -214,3 +214,217 @@
     line-height: 1;        /* Evita que el texto se suba o baje */
     display: inline-block; /* Asegura que el texto se renderice */
 }
+/* ==========================================================================
+   ESTILOS COMPONENTES DHCP & DNS (ESTILO LUCI / NUUPNET)
+   ========================================================================== */
+
+.luci-warning-box {
+    background-color: #fcf3ad;
+    border: 1px solid #eddb3c;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+.luci-warning-box strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.luci-desc {
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+.luci-desc a {
+    color: #337ab7;
+    text-decoration: none;
+}
+.luci-desc a:hover {
+    text-decoration: underline;
+}
+
+.luci-panel {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Manejo de Pestañas (Tabs como Links Reales) */
+.luci-tabs-header {
+    display: flex;
+    background: #ddd;
+    border-bottom: 1px solid #ccc;
+    overflow-x: auto;
+}
+.luci-tab {
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 13px;
+    border-right: 1px solid #ccc;
+    background: #eee;
+    transition: background 0.2s;
+}
+.luci-tab:hover {
+    background: #e0e0e0;
+}
+.luci-tab.active {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    font-weight: bold;
+    margin-bottom: -1px;
+}
+
+/* Cuerpo de Formularios Horizontales */
+.luci-form-area {
+    padding: 20px;
+}
+.luci-form-row {
+    display: flex;
+    margin-bottom: 18px;
+    align-items: flex-start;
+}
+.luci-label {
+    width: 250px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 4px;
+}
+.luci-field-group {
+    flex: 1;
+}
+.luci-checkbox {
+    width: 14px;
+    height: 14px;
+    margin: 4px 0;
+    cursor: pointer;
+}
+.luci-input-text {
+    width: 100%;
+    max-width: 320px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 13px;
+}
+.luci-help {
+    font-size: 11px;
+    color: #777;
+    margin-top: 4px;
+}
+.luci-field-group code {
+    background: #eee;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+/* Entrada Dinámica (Botón +) */
+.luci-input-group-dynamic {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-luci-add {
+    background: #337ab7;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.btn-luci-add:hover {
+    background: #286090;
+}
+
+/* Botones de Barra Inferior */
+.luci-footer-actions {
+    margin-top: 40px;
+    text-align: right;
+    border-top: 1px solid #ccc;
+    padding: 20px 0 0 0;
+}
+.btn-luci {
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+.btn-cyan { background: #5bc0de; }
+.btn-cyan:hover { background: #31b0d5; }
+.btn-blue { background: #337ab7; }
+.btn-blue:hover { background: #286090; }
+.btn-red { background: #d9534f; }
+.btn-red:hover { background: #c9302c; }
+/* ==========================================================================
+   TABLAS DE ASIGNACIONES (ESTILO LUCI / NUUPNET)
+   ========================================================================== */
+
+.luci-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 15px 10px 15px;
+}
+
+.luci-table-wrapper {
+    padding: 0 15px;
+    margin-bottom: 25px;
+}
+
+.luci-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.luci-table th {
+    background: #f5f5f5;
+    padding: 8px 10px;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+    color: #333;
+}
+
+.luci-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    vertical-align: middle;
+}
+
+.luci-table tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+.luci-table-empty {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px !important;
+}
+
+.btn-luci-small {
+    background: #337ab7;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+.btn-luci-small:hover {
+    background: #286090;
+}

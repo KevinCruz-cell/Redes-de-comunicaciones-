@@ -25,6 +25,9 @@ Route::get('/router-test', [RouterLoginController::class, 'testConnection'])->na
 // --- SECCIÓN RED (Vistas con validación manual de sesión) ---
 
 // DHCP Configuración General
+// --- SECCIÓN RED (Vistas con validación manual de sesión) ---
+
+// DHCP Configuración General
 Route::get('/dhcp', function () {
     if (!session('router_logged_in')) {
         return redirect('/login');
@@ -40,6 +43,14 @@ Route::get('/dhcp/resolv', function () {
     return view('dhcp.dhcp-resolv');
 })->name('dhcp.resolv');
 
+// DHCP Configuración TFTP
+Route::get('/dhcp/tftp', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dhcp.dhcp-tftp');
+})->name('dhcp.tftp');
+
 // Nombres de Host
 Route::get('/nombres-host', function () {
     if (!session('router_logged_in')) {
@@ -48,6 +59,21 @@ Route::get('/nombres-host', function () {
     return view('hosts.hosts');
 })->name('hosts.index');
 
+// DHCP Configuración Avanzada
+Route::get('/dhcp/avanzada', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dhcp.dhcp-avanzada');
+})->name('dhcp.avanzada');
+
+// DHCP Asignaciones Estáticas
+Route::get('/dhcp/estaticas', function () {
+    if (!session('router_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dhcp.dhcp-estaticas');
+})->name('dhcp.estaticas');
 
 //Equipo Kevin
 // Vista principal

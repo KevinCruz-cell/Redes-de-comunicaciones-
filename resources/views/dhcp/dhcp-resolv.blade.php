@@ -4,78 +4,83 @@
 @section('header_title', 'DHCP y DNS')
 
 @section('content')
-    <p class="desc">
+    <div class="luci-warning-box">
+        <strong>¡Sin contraseña!</strong>
+        <p>No hay ninguna contraseña establecida en este enrutador. Configure una contraseña de root para proteger la interfaz web.</p>
+    </div>
+
+    <p class="luci-desc">
         Dnsmasq es un programa que combina un servidor <a href="#">DHCP</a> y un reenviador <a href="#">DNS</a> para cortafuegos <a href="#">NAT</a>
     </p>
 
-    <section class="panel">
-        <div class="tabs" style="display: flex; background: #ddd; border-bottom: 1px solid #ccc;">
-            <div class="tab" style="padding: 10px 20px;">Configuración general</div>
-            <div class="tab active" style="padding: 10px 20px; background: #fff; border: 1px solid #ccc; border-bottom: none; font-weight: bold;">Archivos Resolv y Hosts</div>
-            <div class="tab" style="padding: 10px 20px;">Configuración TFTP</div>
-            <div class="tab" style="padding: 10px 20px;">Configuración avanzada</div>
-            <div class="tab" style="padding: 10px 20px;">Asignaciones estáticas</div>
-        </div>
+    <section class="luci-panel">
+        <div class="luci-tabs-header">
+            <a href="/dhcp" class="luci-tab {{ request()->is('dhcp') ? 'active' : '' }}">Configuración general</a>
+            <a href="/dhcp/resolv" class="luci-tab {{ request()->is('dhcp/resolv') ? 'active' : '' }}">Archivos Resolv y Hosts</a>
+            <a href="/dhcp/tftp" class="luci-tab {{ request()->is('dhcp/tftp') ? 'active' : '' }}">Configuración TFTP</a>
+            <a href="/dhcp/avanzada" class="luci-tab {{ request()->is('dhcp/avanzada') ? 'active' : '' }}">Configuración avanzada</a>
+            <a href="/dhcp/estaticas" class="luci-tab {{ request()->is('dhcp/estaticas') ? 'active' : '' }}">Asignaciones estáticas</a>        </div>
 
-        <div class="form-area" style="padding-top: 20px;">
+        <form action="#" method="POST" class="luci-form-area">
+            @csrf
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Usar <code style="background:#eee; padding:2px;">/etc/ethers</code></label>
-                <div class="field-group">
-                    <input type="checkbox" checked>
-                    <div class="help" style="font-size: 11px; color: #777;">Leer <code style="background:#eee;">/etc/ethers</code> para configurar el servidor <a href="#">DHCP</a></div>
+            <div class="luci-form-row">
+                <label class="luci-label">Usar <code>/etc/ethers</code></label>
+                <div class="luci-field-group">
+                    <input type="checkbox" name="usar_ethers" checked class="luci-checkbox">
+                    <div class="luci-help">Leer <code>/etc/ethers</code> para configurar el servidor <a href="#">DHCP</a></div>
                 </div>
             </div>
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Archivo de asignación</label>
-                <div class="field-group">
-                    <input type="text" value="/tmp/dhcp.leases" style="width: 300px;">
-                    <div class="help" style="font-size: 11px; color: #777;">archivo en donde se almacenará las asignaciones <a href="#">DHCP</a></div>
+            <div class="luci-form-row">
+                <label class="luci-label">Archivo de asignación</label>
+                <div class="luci-field-group">
+                    <input type="text" name="archivo_asignacion" value="/tmp/dhcp.leases" class="luci-input-text">
+                    <div class="luci-help">archivo en donde se almacenará las asignaciones <a href="#">DHCP</a></div>
                 </div>
             </div>
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Ignorar el archivo resolve</label>
-                <div class="field-group">
-                    <input type="checkbox">
+            <div class="luci-form-row">
+                <label class="luci-label">Ignorar el archivo resolve</label>
+                <div class="luci-field-group">
+                    <input type="checkbox" name="ignorar_resolv" class="luci-checkbox">
                 </div>
             </div>
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Archivo de resolución</label>
-                <div class="field-group">
-                    <input type="text" value="/tmp/resolv.conf.auto" style="width: 300px;">
-                    <div class="help" style="font-size: 11px; color: #777;">Archivo <a href="#">DNS</a> local</div>
+            <div class="luci-form-row">
+                <label class="luci-label">Archivo de resolución</label>
+                <div class="luci-field-group">
+                    <input type="text" name="archivo_resolucion" value="/tmp/resolv.conf.auto" class="luci-input-text">
+                    <div class="luci-help">Archivo <a href="#">DNS</a> local</div>
                 </div>
             </div>
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Ignorar <code style="background:#eee; padding:2px;">/etc/hosts</code></label>
-                <div class="field-group">
-                    <input type="checkbox">
+            <div class="luci-form-row">
+                <label class="luci-label">Ignorar <code>/etc/hosts</code></label>
+                <div class="luci-field-group">
+                    <input type="checkbox" name="ignorar_hosts" class="luci-checkbox">
                 </div>
             </div>
 
-            <div class="form-row" style="display: flex; margin-bottom: 15px;">
-                <label style="width: 250px; text-align: right; padding-right: 20px;">Archivos de hosts adicionales</label>
-                <div class="field-group">
-                    <div class="input-group" style="display: flex; align-items: center; gap: 5px;">
-                        <input type="text" value="" style="width: 300px;">
-                        <button type="button" style="background: #337ab7; color: white; border: none; padding: 2px 8px; cursor: pointer;">+</button>
+            <div class="luci-form-row">
+                <label class="luci-label">Archivos de hosts adicionales</label>
+                <div class="luci-field-group">
+                    <div class="luci-input-group-dynamic">
+                        <input type="text" name="hosts_adicionales[]" value="" class="luci-input-text">
+                        <button type="button" class="btn-luci-add">+</button>
                     </div>
                 </div>
             </div>
 
-            <div class="footer-actions" style="margin-top: 40px; text-align: right; border-top: 1px solid #ccc; padding: 20px 0;">
-                <button class="btn-cyan" style="background: #5bc0de; color: white; border: none; padding: 8px 15px; cursor: pointer;">GUARDAR Y APLICAR ▾</button>
-                <button class="btn-blue" style="background: #337ab7; color: white; border: none; padding: 8px 15px; cursor: pointer;">GUARDAR</button>
-                <button class="btn-red" style="background: #d9534f; color: white; border: none; padding: 8px 15px; cursor: pointer;">RESTABLECER</button>
+            <div class="luci-footer-actions">
+                <button type="submit" name="action" value="apply" class="btn-luci btn-cyan">GUARDAR Y APLICAR ▾</button>
+                <button type="submit" name="action" value="save" class="btn-luci btn-blue">GUARDAR</button>
+                <button type="reset" class="btn-luci btn-red">RESTABLECER</button>
             </div>
-        </div>
+        </form>
     </section>
 
-    <div class="footer-note" style="font-size: 10px; color: #aaa; text-align: right; margin-top: 10px;">
-        Powered by LuCI openwrt-19.07 branch (git-22.045.73925-36e5c1c) / OpenWrt 19.07.9 r11405-2a3558b0de
+    <div class="luci-footer-note">
+        Powered by LuCI openwrt-19.07 branch / OpenWrt 19.07.9
     </div>
 @endsection
