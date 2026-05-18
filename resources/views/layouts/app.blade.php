@@ -2,9 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NuupNet - @yield('title')</title>
-    @vite(['public/css/style.css'])
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @stack('styles')
 </head>
 <body>
 <header class="navbar-top">
@@ -28,12 +30,12 @@
                 </button>
                 <ul class="submenu">
                     <li><a href="#" class="{{ request()->is('vision-general') ? 'active' : '' }}">Visión general</a></li>
-                    <li><a href="#">Cortafuegos</a></li>
-                    <li><a href="#">Rutas</a></li>
-                    <li><a href="#">Registro del sistema</a></li>
-                    <li><a href="#">Registro del núcleo</a></li>
-                    <li><a href="#">Procesos</a></li>
-                    <li><a href="#">Gráficos en tiempo real</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Cortafuegos</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Rutas</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Registro del sistema</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Registro del núcleo</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Procesos</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Gráficos en tiempo real</a></li>
                 </ul>
             </div>
 
@@ -42,13 +44,21 @@
                     Sistema <span class="arrow">﹀</span>
                 </button>
                 <ul class="submenu">
-                    <li><a href="#">Sistema</a></li>
-                    <li><a href="#">Administración</a></li>
-                    <li><a href="#">Arranque</a></li>
-                    <li><a href="#">Tareas programadas</a></li>
-                    <li><a href="#">Configuración de LEDs</a></li>
-                    <li><a href="#">Copia de seguridad / Grabar firmware</a></li>
-                    <li><a href="#">Reiniciar</a></li>
+                    <li class="{{ request()->is('sistema') ? 'active-item' : '' }}">
+                        <a href="{{ route('system.index') }}">Sistema</a>
+                    </li>
+
+                    <li class="{{ request()->is('sistema/administracion') ? 'active-item' : '' }}">
+                        <a href="{{ route('admin.index') }}">Administración</a>
+                    </li>
+
+                    <li class="{{ request()->is('sistema/arranque') ? 'active-item' : '' }}">
+                        <a href="/sistema/arranque">Arranque</a>
+                    </li>
+                    <li><a href="{{ route('router4.tareas') }}">Tareas programadas</a></li>
+                    <li><a href="{{ route('router4.leds') }}">Configuración de LEDs</a></li>
+                    <li><a href="{{ route('router4.copia') }}">Copia de seguridad / Grabar firmware</a></li>
+                    <li><a href="{{ route('router2.control') }}">Reiniciar</a></li>
                 </ul>
             </div>
 
@@ -57,7 +67,7 @@
                     Red <span class="arrow">︿</span>
                 </button>
                 <ul class="submenu">
-                    <li><a href="#">Interfaces</a></li>
+                    <li><a href="{{ route('router2.interfaces') }}">Interfaces</a></li>
                     <li><a href="{{ route('Wifi_Conmutador') }}">Wi-Fi</a></li>
                     <li><a href="{{ route('Wifi_Conmutador') }}">Conmutador</a></li>
                     <li class="{{ request()->is('dhcp*') ? 'active-item' : '' }}">
@@ -66,8 +76,8 @@
                     <li class="{{ request()->is('hosts*') ? 'active-item' : '' }}">
                         <a href="/nombres-host">Nombres de host</a>
                     </li>
-                    <li><a href="#">Rutas estáticas</a></li>
-                    <li><a href="#">Diagnósticos</a></li>
+                    <li><a href="{{ route('router3.rutas') }}">Rutas estáticas</a></li>
+                    <li><a href="{{ route('router3.diagnosticos') }}">Diagnósticos</a></li>
                 </ul>
             </div>
         </nav>
@@ -96,6 +106,7 @@
         </footer>
     </main>
 </div>
+@stack('scripts')
 </body>
 <script>
 
