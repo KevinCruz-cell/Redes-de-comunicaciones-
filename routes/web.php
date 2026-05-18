@@ -5,6 +5,8 @@ use App\Http\Controllers\PostgresLogController;
 use App\Http\Controllers\RouterLoginController;
 //Equipo Kevin
 use App\Http\Controllers\RouterController;
+//Equipo Adrian
+use App\Http\Controllers\Router2Controller;
 
 // Vista principal
 Route::get('/', function () {
@@ -65,3 +67,27 @@ Route::prefix('api/router')->group(function () {
 Route::get('/api/router/port-status', [RouterController::class, 'getPortStatus']);
 Route::post('/api/router/set-port-state', [RouterController::class, 'setPortState']);
 Route::get('/Wifi_Conmutador', [RouterController::class, 'index'])->name('Wifi_Conmutador');
+
+
+// Equipo Adrian
+// Ruta para la página de reinicio (vista simple)
+Route::get('/router2/control', function () {
+    return view('Reinicio.reinicio');  // CORREGIDO: reinicio
+})->name('router2.control');
+
+// Ruta principal de gestión de interfaces (listado) - CORREGIDO
+Route::get('/router2/interfaces', [Router2Controller::class, 'gestionRed'])->name('router2.interfaces');
+
+// Acciones globales
+Route::post('/router2-reboot', [Router2Controller::class, 'reiniciar'])->name('router2.reboot');
+Route::post('/router2/interfaces/create', [Router2Controller::class, 'crearInterfaz'])->name('router2.crear');
+Route::get('/router2/refresh', [Router2Controller::class, 'refrescar'])->name('router2.refresh');
+
+// ============================================================
+// RUTAS CORRECTAS PARA OPERACIONES SOBRE UNA INTERFAZ ESPECÍFICA
+// ============================================================
+Route::post('/interfaz2/{iface}/reiniciar', [Router2Controller::class, 'reiniciarInterfaz'])->name('router2.iface.restart');
+Route::post('/interfaz2/{iface}/detener', [Router2Controller::class, 'detenerInterfaz'])->name('router2.iface.stop');
+Route::delete('/interfaz2/{iface}', [Router2Controller::class, 'eliminarInterfaz'])->name('router2.delete');
+Route::get('/interfaz2/{iface}/editar', [Router2Controller::class, 'editarInterfaz'])->name('router2.editar');
+Route::put('/interfaz2/{iface}', [Router2Controller::class, 'actualizarInterfaz'])->name('router2.actualizar');

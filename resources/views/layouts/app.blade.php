@@ -48,7 +48,7 @@
                     <li><a href="#">Tareas programadas</a></li>
                     <li><a href="#">Configuración de LEDs</a></li>
                     <li><a href="#">Copia de seguridad / Grabar firmware</a></li>
-                    <li><a href="#">Reiniciar</a></li>
+                    <li><a href="{{ route('router2.control') }}">Reiniciar</a></li>
                 </ul>
             </div>
 
@@ -57,7 +57,7 @@
                     Red <span class="arrow">︿</span>
                 </button>
                 <ul class="submenu">
-                    <li><a href="#">Interfaces</a></li>
+                    <li><a href="{{ route('router2.interfaces') }}">Interfaces</a></li>
                     <li><a href="{{ route('Wifi_Conmutador') }}">Wi-Fi</a></li>
                     <li><a href="{{ route('Wifi_Conmutador') }}">Conmutador</a></li>
                     <li class="{{ request()->is('dhcp*') ? 'active-item' : '' }}">
