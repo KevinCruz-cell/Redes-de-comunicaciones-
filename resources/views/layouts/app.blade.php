@@ -30,12 +30,12 @@
                 </button>
                 <ul class="submenu">
                     <li><a href="#" class="{{ request()->is('vision-general') ? 'active' : '' }}">Visión general</a></li>
-                    <li><a href="#">Cortafuegos</a></li>
-                    <li><a href="#">Rutas</a></li>
-                    <li><a href="#">Registro del sistema</a></li>
-                    <li><a href="#">Registro del núcleo</a></li>
-                    <li><a href="#">Procesos</a></li>
-                    <li><a href="#">Gráficos en tiempo real</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Cortafuegos</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Rutas</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Registro del sistema</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Registro del núcleo</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Procesos</a></li>
+                    <li><a href="{{ route('Dashboard.dashboard') }}">Gráficos en tiempo real</a></li>
                 </ul>
             </div>
 
@@ -55,10 +55,9 @@
                     <li class="{{ request()->is('sistema/arranque') ? 'active-item' : '' }}">
                         <a href="/sistema/arranque">Arranque</a>
                     </li>
-
-                    <li><a href="#">Tareas programadas</a></li>
-                    <li><a href="#">Configuración de LEDs</a></li>
-                    <li><a href="#">Copia de seguridad / Grabar firmware</a></li>
+                    <li><a href="{{ route('router4.tareas') }}">Tareas programadas</a></li>
+                    <li><a href="{{ route('router4.leds') }}">Configuración de LEDs</a></li>
+                    <li><a href="{{ route('router4.copia') }}">Copia de seguridad / Grabar firmware</a></li>
                     <li><a href="{{ route('router2.control') }}">Reiniciar</a></li>
                 </ul>
             </div>
@@ -77,8 +76,8 @@
                     <li class="{{ request()->is('hosts*') ? 'active-item' : '' }}">
                         <a href="/nombres-host">Nombres de host</a>
                     </li>
-                    <li><a href="#">Rutas estáticas</a></li>
-                    <li><a href="#">Diagnósticos</a></li>
+                    <li><a href="{{ route('router3.rutas') }}">Rutas estáticas</a></li>
+                    <li><a href="{{ route('router3.diagnosticos') }}">Diagnósticos</a></li>
                 </ul>
             </div>
         </nav>
