@@ -8,6 +8,11 @@ use App\Http\Controllers\RouterController;
 //Equipo Adrian
 use App\Http\Controllers\Router2Controller;
 
+//Moy
+use App\Http\Controllers\SystemController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArranqueController;
+
 // Vista principal
 Route::get('/', function () {
     return view('welcome');
@@ -91,3 +96,55 @@ Route::post('/interfaz2/{iface}/detener', [Router2Controller::class, 'detenerInt
 Route::delete('/interfaz2/{iface}', [Router2Controller::class, 'eliminarInterfaz'])->name('router2.delete');
 Route::get('/interfaz2/{iface}/editar', [Router2Controller::class, 'editarInterfaz'])->name('router2.editar');
 Route::put('/interfaz2/{iface}', [Router2Controller::class, 'actualizarInterfaz'])->name('router2.actualizar');
+
+// ============================================================
+// Equipo Moy
+// ============================================================
+
+Route::get('/sistema', [SystemController::class, 'index'])
+    ->name('system.index');
+
+Route::get('/sistema/data', [SystemController::class, 'getData'])
+    ->name('system.data');
+
+Route::post('/sistema/update', [SystemController::class, 'update'])
+    ->name('system.update');
+
+// ============================================================
+// Equipo Moy - Administracion
+// ============================================================
+
+Route::get('/sistema/administracion', [AdminController::class, 'index'])
+    ->name('admin.index');
+
+Route::get('/administracion/data', [AdminController::class, 'getData'])
+    ->name('admin.data');
+
+Route::post('/administracion/password', [AdminController::class, 'updatePassword'])
+    ->name('admin.password');
+
+Route::post('/administracion/ssh', [AdminController::class, 'updateSSH'])
+    ->name('admin.ssh');
+
+Route::post('/administracion/key', [AdminController::class, 'uploadKey'])
+    ->name('admin.key');
+
+    Route::get('/administracion/keys', [AdminController::class, 'getKeys'])
+        ->name('admin.keys');
+
+    Route::post('/administracion/key/delete', [AdminController::class, 'deleteKey'])
+        ->name('admin.key.delete');
+
+        /// Equipo Moy arranque
+
+    Route::get('/sistema/arranque', [ArranqueController::class, 'index'])
+        ->name('sistema.arranque');
+
+    Route::get('/arranque/data', [ArranqueController::class, 'getData'])
+        ->name('arranque.data');
+
+    Route::post('/arranque/action', [ArranqueController::class, 'action'])
+        ->name('arranque.action');
+
+    Route::post('/arranque/local-startup', [ArranqueController::class, 'updateLocalStartup'])
+        ->name('arranque.local.startup');
