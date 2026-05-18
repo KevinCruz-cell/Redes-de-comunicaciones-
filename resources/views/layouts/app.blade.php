@@ -2,9 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NuupNet - @yield('title')</title>
-    @vite(['public/css/style.css'])
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @stack('styles')
 </head>
 <body>
 <header class="navbar-top">
@@ -42,9 +44,18 @@
                     Sistema <span class="arrow">﹀</span>
                 </button>
                 <ul class="submenu">
-                    <li><a href="#">Sistema</a></li>
-                    <li><a href="#">Administración</a></li>
-                    <li><a href="#">Arranque</a></li>
+                    <li class="{{ request()->is('sistema') ? 'active-item' : '' }}">
+                        <a href="{{ route('system.index') }}">Sistema</a>
+                    </li>
+
+                    <li class="{{ request()->is('sistema/administracion') ? 'active-item' : '' }}">
+                        <a href="{{ route('admin.index') }}">Administración</a>
+                    </li>
+
+                    <li class="{{ request()->is('sistema/arranque') ? 'active-item' : '' }}">
+                        <a href="/sistema/arranque">Arranque</a>
+                    </li>
+
                     <li><a href="#">Tareas programadas</a></li>
                     <li><a href="#">Configuración de LEDs</a></li>
                     <li><a href="#">Copia de seguridad / Grabar firmware</a></li>
@@ -96,6 +107,7 @@
         </footer>
     </main>
 </div>
+@stack('scripts')
 </body>
 <script>
 
